@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Content Parser</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px;
+        }
+        #content {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>URL Content Parser</h1>
+    <p>Введите URL веб-страницы:</p>
+    <input type="text" id="urlInput" placeholder="https://example.com">
+    <button onclick="fetchAndParse()">Загрузить</button>
+    <div id="content">
+        <h2>Содержимое:</h2>
+    </div>
+
+    <script>
+        async function fetchAndParse() {
+            const url = document.getElementById('urlInput').value;
+            const contentDiv = document.getElementById('content');
+
+            contentDiv.innerHTML = '<h2>Содержимое:</h2>'; // Очищаем контейнер
+
+            if (!url) {
+                alert('Введите корректный URL!');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/proxy?target=' + encodeURIComponent(url));
+                if (!response.ok) {
+                    throw new Error('Ошибка при загрузке: ' + response.statusText);
+                }
+
+                const htmlText = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlText, 'text/html');
+
+                const elements = doc.querySelectorAll('h1, h2, h3, p');
+                elements.forEach(el => {
+                    const newEl = document.createElement(el.tagName.toLowerCase());
+                    newEl.textContent = el.textContent;
+                    contentDiv.appendChild(newEl);
+                });
+            } catch (error) {
+                console.error(error);
+                alert('Не удалось загрузить контент. Проверьте URL или попробуйте снова.');
+            }
+        }
+    </script>
+</body>
+</html>
