@@ -6,66 +6,36 @@
     <title>URL Content Parser</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
         }
-        input[type="text"] {
-            width: 60%;
-            padding: 10px;
-            margin-right: 10px;
-        }
-        button {
-            padding: 10px;
-        }
-        #content {
-            margin-top: 20px;
-            border: 1px solid #ccc;
+        #left, #right {
+            flex: 1;
             padding: 20px;
+            border: 1px solid #ccc;
         }
     </style>
+    <script src="url-parser-server/functionality.js"></script>
 </head>
 <body>
-    <h1>URL Content Parser</h1>
-    <p>Введите URL веб-страницы:</p>
-    <input type="text" id="urlInput" placeholder="https://example.com">
-    <button onclick="fetchAndParse()">Загрузить</button>
-    <div id="content">
-        <h2>Содержимое:</h2>
+     <!-- Левая часть для ввода и загрузки контента -->
+     <div id="left">
+        <input id="urlInput" type="text" placeholder="Enter website URL">
+        <button onclick="fetchContent()">Fetch Content</button>
+        <button onclick="saveContent()">Save as Text File</button>
+        <div id="content"></div>
     </div>
 
-    <script>
-        async function fetchAndParse() {
-            const url = document.getElementById('urlInput').value;
-            const contentDiv = document.getElementById('content');
-
-            contentDiv.innerHTML = '<h2>Содержимое:</h2>'; // Очищаем контейнер
-
-            if (!url) {
-                alert('Введите корректный URL!');
-                return;
-            }
-
-            try {
-                const response = await fetch('http://localhost:3000/proxy?target=' + encodeURIComponent(url));
-                if (!response.ok) {
-                    throw new Error('Ошибка при загрузке: ' + response.statusText);
-                }
-
-                const htmlText = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(htmlText, 'text/html');
-
-                const elements = doc.querySelectorAll('h1, h2, h3, p');
-                elements.forEach(el => {
-                    const newEl = document.createElement(el.tagName.toLowerCase());
-                    newEl.textContent = el.textContent;
-                    contentDiv.appendChild(newEl);
-                });
-            } catch (error) {
-                console.error(error);
-                alert('Не удалось загрузить контент. Проверьте URL или попробуйте снова.');
-            }
-        }
-    </script>
+    <!-- Правая часть для перевода -->
+    <div id="right">
+        <select id="languageSelector" onchange="translateContent()">
+            <option value="en">Translate to English</option>
+            <option value="es">Translate to Spanish</option>
+            <option value="fr">Translate to French</option>
+            <option value="de">Translate to German</option>
+        </select>
+        <div id="translatedContent"></div>
+    </div>
 </body>
 </html>
