@@ -12,20 +12,20 @@ free APIs is not a working solution. Theoretically I will be able to set up a lo
 Node.JS
 JavaScript
 Libraries or modules:
- * axios
+* axios
 * body-parser
 * cors
+
 # Useful Websites
 
 {Make a list of websites that you found helpful in this project}
 
-- [Web Site Name](http://url.link.goes.here)
-- [Web Site Name](http://url.link.goes.here)
+- [ChatGPT](https://chatgpt.com/)
+- [CORS explanation](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
+- [Node.JS](https://nodejs.org/en)
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
-
-- Item 1
-- Item 2
-- Item 3
+- Site is hosted on the web as well as node.js server
+- Frontend looks prettier and cleaner, with paragraphs and translation part hidden untill button to translate is pressed
+- Locally hosted AI with API to translate info 
