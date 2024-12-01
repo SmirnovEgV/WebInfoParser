@@ -12,9 +12,9 @@ free APIs is not a working solution. Theoretically I will be able to set up a lo
 Node.JS
 JavaScript
 Libraries or modules:
-*axios
-*body-parser
-*cors
+ * axios
+* body-parser
+* cors
 # Useful Websites
 
 {Make a list of websites that you found helpful in this project}
