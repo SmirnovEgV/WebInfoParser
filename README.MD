@@ -5,8 +5,6 @@ It's a bit uncomfortable to grab site contents when you have adds all around the
 So here you can read stuff without any interuptions, copy parts or grab txt file. I wanted to implement a translation option but it seems that for bigger chuncks of text 
 free APIs is not a working solution. Theoretically I will be able to set up a locally hosted AI to do that, but not in this version.
 
-[Software Demo Video](https://youtu.be/8La-2BLu4JM)
-
 # Development Environment
 
 Node.JS
@@ -29,3 +27,5 @@ Libraries or modules:
 - Site is hosted on the web as well as node.js server
 - Frontend looks prettier and cleaner, with paragraphs and translation part hidden untill button to translate is pressed
 - Locally hosted AI with API to translate info 
+
+[Don't watch this garbage](https://youtu.be/8La-2BLu4JM)
